@@ -22,12 +22,12 @@ def inference(model_inputs:dict) -> dict:
         return {'message': "No input provided"}
     
     mp3Bytes = BytesIO(base64.b64decode(mp3BytesString.encode("ISO-8859-1")))
-    with open('input.mp3','wb') as file:
+    with open('input.wav','wb') as file:
         file.write(mp3Bytes.getbuffer())
     
     # Run the model
-    result = model.transcribe("input.mp3")
+    result = model.transcribe("input.wav")
     output = {"text":result["text"]}
-    os.remove("input.mp3")
+    os.remove("input.wav")
     # Return the results as a dictionary
     return output
